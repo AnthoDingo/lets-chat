@@ -146,6 +146,9 @@
             var icon = 'https://www.gravatar.com/avatar/' + avatar + '?s=50';
             var title = message.owner.displayName + ' in ' + message.room.name;
             var mention = message.mentioned;
+            var audioEnabled = this.readCookie('audio-notifications') || false;
+            var feraseCookie = this.eraseCookie;
+            var fcreateCookie = this.createCookie;
 
             var notification = notify.createNotification(title, {
                 body: message.text,
@@ -154,6 +157,15 @@
                 onclick: function() {
                     window.focus();
                     self.client.events.trigger('rooms:switch', roomId);
+                },ondisplay: function(){
+                    if(audioEnabled === "true"){
+                        fcreateCookie(name,"",-1);
+                        fcreateCookie('audio-notifications', true, 30);
+                        var audio = new Audio('/media/audio/duck.mp3');
+                        audio.play();
+                    } else {
+                        //console.log('no coin coin');
+                    }
                 }
             });
 
@@ -174,6 +186,25 @@
             setTimeout(function() {
                 notification.close();
             }, 5 * 1000);
+        },
+        createCookie: function(name,value,days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+        },
+        readCookie: function(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
         }
     });
 
