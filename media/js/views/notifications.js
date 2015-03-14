@@ -16,7 +16,8 @@
         events: {
             'click [name=desktop-notifications]': 'toggleDesktopNotifications',
             'change [name=audio-notifications]': 'toggleAudioNotifications',
-            'change [name=notificationsound]': 'changeNotificationSound'
+            'change [name=notificationsound]': 'changeNotificationSound',
+            'click [name=bntpreview]': 'audioPreview'
         },
         initialize: function() {
             this.render();
@@ -73,6 +74,10 @@
         },
         changeNotificationSound : function(){
             this.createCookie('audioSound', $("#notificationsound option:selected").val(), 30);
+        },
+        audioPreview: function(){
+            var audio = new Audio('/media/audio/notifications/'+$("#notificationsound option:selected").val());
+            audio.play();
         },
         createCookie: function(name,value,days) {
             if (days) {
