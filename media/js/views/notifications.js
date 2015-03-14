@@ -15,7 +15,8 @@
         count: 0,
         events: {
             'click [name=desktop-notifications]': 'toggleDesktopNotifications',
-            'change [name=audio-notifications]': 'toggleAudioNotifications'
+            'change [name=audio-notifications]': 'toggleAudioNotifications',
+            'change [name=notificationsound]': 'changeNotificationSound'
         },
         initialize: function() {
             this.render();
@@ -44,9 +45,14 @@
             var $audioEnabled = this.readCookie('audio-notifications') || false;
             if($audioEnabled === "true"){
                 this.$('[name=audio-notifications]').prop('checked', true);
+                this.$('[name=notificationsound]').prop('disabled', false);
             } else {
                 this.$('[name=audio-notifications]').prop('checked', false);
+                this.$('[name=notificationsound]').prop('disabled', 'disabled');
             }
+
+            var $audiosound = this.readCookie('audioSound') || 'duck.mp3';
+            this.$('[name=notificationsound]').val($audiosound);
         },
         toggleDesktopNotifications: function() {
             var self = this;
@@ -64,6 +70,9 @@
             } else {
                 this.createCookie('audio-notifications', false, 30);
             }
+        },
+        changeNotificationSound : function(){
+            this.createCookie('audioSound', $("#notificationsound option:selected").val(), 30);
         },
         createCookie: function(name,value,days) {
             if (days) {

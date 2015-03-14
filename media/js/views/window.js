@@ -147,6 +147,7 @@
             var title = message.owner.displayName + ' in ' + message.room.name;
             var mention = message.mentioned;
             var audioEnabled = this.readCookie('audio-notifications') || false;
+            var audioSound = this.readCookie('audioSound') || 'duck.mp3';
             var feraseCookie = this.eraseCookie;
             var fcreateCookie = this.createCookie;
 
@@ -161,7 +162,7 @@
                     if(audioEnabled === "true"){
                         fcreateCookie(name,"",-1);
                         fcreateCookie('audio-notifications', true, 30);
-                        var audio = new Audio('/media/audio/duck.mp3');
+                        var audio = new Audio('/media/audio/notifications/'+audioSound);
                         audio.play();
                     } else {
                         //console.log('no coin coin');

@@ -6,26 +6,38 @@
                 <h4 class="modal-title"><i class="fa fa-bell"></i> Notifications</h4>
             </div>
             <div class="modal-body">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <button name="desktop-notifications" class="btn btn-info" style="text-align: left">
-                            <span class="enabled">
-                                Desktop Notifications are <strong>enabled</strong>
-                                <br /><small>Use your browser settings to disable them</small>
-                            </span>
-                            <span class="disabled">Enable Desktop Notifications</span>
-                            <span class="blocked">
-                                Desktops Notifications are <strong>blocked</strong>
-                                <br /><small>Please check your browser settings</small>
-                            </span>
-                        </button>
-                    </div>
+            <div class="form-group">
+                <button name="desktop-notifications" class="btn btn-info" style="text-align: left">
+                    <span class="enabled">
+                        Desktop Notifications are <strong>enabled</strong>
+                        <br /><small>Use your browser settings to disable them</small>
+                    </span>
+                    <span class="disabled">Enable Desktop Notifications</span>
+                    <span class="blocked">
+                        Desktops Notifications are <strong>blocked</strong>
+                        <br /><small>Please check your browser settings</small>
+                    </span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="checkbox">
                         <label>
                             <input name="audio-notifications" type="checkbox">Audio Notification
                         </label>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Notification Sound</label>
+                        <select class="form-control" name="notificationsound" id="notificationsound">
+                            <option value="duck.mp3">Duck</option>
+                            <option value="pikachu.mp3">Pikachu</option>
+                            <option value="pikapi.mp3">Pikapi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             </div>
          </div>
     </div>
